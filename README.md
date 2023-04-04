@@ -42,7 +42,8 @@ rausgefiltert.<br><br>
 
 Da in Ubuntu kein /a für Sound geht wurde das lizensfreie<br>
 pferd.wav verwendet. Kann man natürlich mit dem selben Namen<br>
-nach belieben ersetzen.<br><br>
+nach belieben ersetzen. Das Programm aplay sollte zum Abspielen<br> 
+installiert sein.<br><br>
 
 
 Compilieren:<br>
