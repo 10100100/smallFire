@@ -30,8 +30,8 @@ Leider gibt es noch Probleme mit ncurses und getch die Nummer<br>
 Abfrage korrekt anzuzeigen.<br>
 Die einzugebene Nummer findet man übrigens immer am Anfang der<br> 
 jeweiligen Auflistung.<br><br>
-Es werden keine 0.0.0.0 TCP Verbindungen angezeigt diese werden
-rausgefiltert.
+Es werden keine 0.0.0.0 TCP Verbindungen angezeigt diese werden<br>
+rausgefiltert.<br><br>
 
 Da in Ubuntu kein /a für Sound geht wurde das lizensfreie<br>
 pferd.wav verwendet. Kann man natürlich mit dem selben Namen <br>
