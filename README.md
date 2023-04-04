@@ -13,6 +13,13 @@ Jetzt ist smallFire auch unter sudo ./smallFire einsatzbereit.<br>
 Was man benötigt um alle Programme zu sehen und Verbindungen<br>
 verbieten zu können.<br><br>
 
+Dateien:<br>
+liste.txt enthält die erlaubten Programme<br>
+verbindung.txt enthält als Verbindungs log Datei alle nicht<br>
+erlaubten Programme<br>
+pferd.wav sound um zu merken das eine nicht erlaubte Verbindung<br> 
+ausgeht<br><br>
+
 Tasten Funktionen im Programm:<br>
 q - für Beenden des Programms<br>
 d - für DNS anzeigen<br>
@@ -34,7 +41,7 @@ Es werden keine 0.0.0.0 TCP Verbindungen angezeigt diese werden<br>
 rausgefiltert.<br><br>
 
 Da in Ubuntu kein /a für Sound geht wurde das lizensfreie<br>
-pferd.wav verwendet. Kann man natürlich mit dem selben Namen <br>
+pferd.wav verwendet. Kann man natürlich mit dem selben Namen<br>
 nach belieben ersetzen.<br><br>
 
 
