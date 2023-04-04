@@ -4,8 +4,8 @@ Kleine Firewall auf Basis von inet_diag<br>
 smallFire zeigt uns alle ausgehenden TCP Verbindungen und das<br>
 fortlaufend als Monitor auf der Shell.<br><br>
 
-Nach dem Compilieren startet man am besten das Scirpt erstmal<br>
-ohne sudo. Damit werden alle benötigten Datein automatisch<br> 
+Nach dem Compilieren startet man am besten das Script erst mal<br>
+ohne sudo. Damit werden alle benötigten Dateien automatisch<br> 
 angelegt. Nach dem Ausführen wird liste.txt gleich angelegt.<br>
 Dann öffnet mal kurz ein Verbindung z.B. durch öffnen des <br>
 Browsers damit wird die Datei verbindung.txt angelegt.<br>
@@ -35,12 +35,12 @@ und wartet auf die Eingabe der Nummer. Wenn man die Nummer<br>
 eingegeben hat drückt man danach Enter.<br>
 Leider gibt es noch Probleme mit ncurses und getch die Nummer<br>
 Abfrage korrekt anzuzeigen.<br>
-Die einzugebene Nummer findet man übrigens immer am Anfang der<br> 
+Die einzugebende Nummer findet man übrigens immer am Anfang der<br> 
 jeweiligen Auflistung.<br><br>
 Es werden keine 0.0.0.0 TCP Verbindungen angezeigt diese werden<br>
-rausgefiltert.<br><br>
+raus gefiltert.<br><br>
 
-Da in Ubuntu kein /a für Sound geht wurde das lizensfreie<br>
+Da in Ubuntu kein /a für Sound geht wurde das Lizenzfreie<br>
 pferd.wav verwendet. Kann man natürlich mit dem selben Namen<br>
 nach belieben ersetzen. Das Programm aplay sollte zum Abspielen<br> 
 installiert sein.<br><br>
@@ -50,4 +50,4 @@ Compilieren:<br>
 gcc -o smallFire smallFire.c -lncurses -Wall<br><br>
 
 
-Ich wünsche euch viel Spass mit dem Tool
+Ich wünsche euch viel Spaß mit dem Tool
