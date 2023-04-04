@@ -27,9 +27,9 @@ s - für verbiete Verbindung mit Nummer<br>
 e - für erlaube Programm mit Nummer<br>
 l - für zeige erlaubte Programme<br>
 r - für Lösche erlaubtes Programm mit Nummer<br> 
-    vorher am besten l drücken<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vorher am besten l drücken um die Nummer zusehen<br><br> 
 
-Achtung: 
+Achtung:<br> 
 Wenn man die Nummer angeben soll stoppt das Programm<br>
 und wartet auf die Eingabe der Nummer. Wenn man die Nummer<br>
 eingegeben hat drückt man danach Enter.<br>
