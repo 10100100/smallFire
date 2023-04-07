@@ -182,13 +182,14 @@ int ho_filter(const struct dirent *dir){
 int holen(char *verz){   	
     
 struct dirent **liste;	
-int zae=0,len=0;;
+int zae=0,len=0;
 	
 	zae=scandir(verz, &liste, ho_filter, 0);
      	if(zae<0){
      	return EXIT_FAILURE;
         }
-        else if(zae!=0){	        
+        else if(zae!=0){
+	//dynamisch Speicher bereitstellen für ch	
         ch = (char**) malloc (sizeof(int*)*zae);  
 	if(ch == NULL)
      	return EXIT_FAILURE;
@@ -200,9 +201,9 @@ int zae=0,len=0;;
         	if(*(ch+iHO) == NULL)
      		return EXIT_FAILURE;
        
-        	//ch füllen mit den gesuchten verzeichnissen
-    		strncpy(ch[iHO],liste[iHO]->d_name,sizeof(ch[iHO])-1);
-        	ch[iHO][sizeof(ch[iHO])-1]='\0';
+        	//ch füllen mit den gesuchten Verzeichnissen
+    		strncpy(ch[iHO],liste[iHO]->d_name,len-1);
+        	ch[iHO][sizeof(len-1]='\0';
 		free(liste[iHO]);  
         	} //for(iHO=0
         	        
@@ -588,19 +589,12 @@ int zeileLoe=0;
     }
     
     //einen programmnamen entfernen
-    //Problem sobald fgets von stdin etwas erwartet springt erst sofort dahin
-    //und stoppt das programm und es wird nichts mehr davor oder danach angezeigt 
-    //erst wieder wenn fgets seine eingabe hat auch egal ob man das unten in der 
-    //main() macht oder hier ist ein ncurses problem in einer normalen shell 
-    //macht er das nicht es liegt also am stdin
     if(key==114){
     clear();
     	    printw("\n\nBitte die Nummer eingeben:\n");
-    	    printw("Die neue Liste:\n");          //deswegen ist sowas möglich wird ja eh erst 
-    	    					  //nach fgets alles angezeigt        
+    	    printw("Die neue Liste:\n");                 
             fgets(buf3, 3, stdin);
             sscanf(buf3, "%d", &zeileLoe);  
-            //printw("Nummer:%d",zeileLoe);
         
     ListeP = fopen("liste.txt", "w");
     	if(ListeP == NULL){
