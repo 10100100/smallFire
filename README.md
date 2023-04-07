@@ -37,8 +37,19 @@ Leider gibt es noch Probleme mit ncurses und getch die Nummer<br>
 Abfrage korrekt anzuzeigen.<br>
 Die einzugebende Nummer findet man übrigens immer am Anfang der<br> 
 jeweiligen Auflistung.<br><br>
+
 Es werden keine 0.0.0.0 TCP Verbindungen angezeigt diese werden<br>
 raus gefiltert.<br><br>
+
+Wenn man eine Verbindung stoppt wird sie nur solange geblockt bis<br>
+der Rechner neu gestartet wird. Falls man die Verbindung wieder<br>
+zulassen möchte prüft die Regeln mit sudo iptables -L -v und dann<br>
+sudo iptables -D OUTPUT -d "destination" -p tcp -j DROP oder sudo<br>
+iptables -D OUTPUT 1 für das Löschen der ersten Regel in OUTPUT<br> 
+oder sudo iptables -F für das Löschen aller Regeln.<br>
+Wenn man diese Regel dauerhaft speichern möchte muss man<br>
+iptables-save, iptables-restore und wenn man es wünscht<br>
+iptables-persisitent verwenden.<br><br>
 
 Da in Ubuntu kein /a für Sound geht wurde das Lizenzfreie<br>
 pferd.wav verwendet. Kann man natürlich mit dem selben Namen<br>
@@ -47,6 +58,7 @@ installiert sein.<br><br>
 
 
 Compilieren:<br>
+sudo apt install libncurses5-dev libncursesw5-dev<br>
 gcc -o smallFire smallFire.c -lncurses -Wall<br><br>
 
 
