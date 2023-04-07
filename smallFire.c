@@ -834,8 +834,7 @@ int zeileLoe=0;
     } //while endlos
 
 //filterPRG leeren
-if(*filterPRG != NULL)
-free(*filterPRG);		
+free(filterPRG);		
 //----------------------- recive socket mit struct.alle vergleichen und anzeigen -------------------------
 
 } //loop()
