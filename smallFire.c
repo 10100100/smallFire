@@ -762,6 +762,10 @@ int zeileLoe=0;
 		zeiR++;
 		zeiR++;
    		
+		//Überprüfen das es nicht mehr als 24 Verbindungen sind
+   		//kann man noch ändern auf dynamische Speichergröße je nach hoehe
+   		if(r<24){
+                	
                 //schliessen der unerwünschten verbindung 
                 strncpy(zwi[r],remote_addr_buf,sizeof(zwi[r])-1);
                 zwi[r][sizeof(zwi[r])-1]='\0';
@@ -778,7 +782,8 @@ int zeileLoe=0;
                 system(davor);
                 printw("Die Verbindungnr.%d wurde geschlossen\n",zu);              
                 } //if(zu
-                                
+		} //if(r
+			
                 //erlauben von programmen 
                 if(erlaub!=0 && r==erlaub){
                 safen(alle[jop].exEP,alle[jop].exEPL,2);
