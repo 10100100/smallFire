@@ -81,7 +81,7 @@ static const char *tcp_states_map[]={
 #define ZWI_MAX_LENGTH INET6_ADDRSTRLEN
     
 #define PID_SOCKET_MENGE 1500
-#define PFADK_MENGE 3000	
+#define PFADK_MENGE 3000
 
 //--------------------------------------------------------------------------------------------------------
 //include,define,enum ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -102,10 +102,10 @@ int iRE=0;
 struct pidSocket{
     int nummer;
     int pidP;
-    int socket;
+    unsigned int socket;
     char exEP[20];
     char exEPL[100];
-}alle[PID_SOCKET_MENGE]; //			
+}alle[PID_SOCKET_MENGE]; 
 static int zALLE=0,PIDMenge=0;
 
 
@@ -136,12 +136,12 @@ int stunden, minuten, sekunden, tag, monat, jahr;
 	return EXIT_FAILURE;
 	}
 
-	stunden=local->tm_hour;		
-	minuten=local->tm_min;		
-	sekunden=local->tm_sec;		
-	tag=local->tm_mday;		
-	monat=local->tm_mon+1;		
-	jahr=local->tm_year+1900;	
+	stunden=local->tm_hour;
+	minuten=local->tm_min;
+	sekunden=local->tm_sec;
+	tag=local->tm_mday;
+	monat=local->tm_mon+1;
+	jahr=local->tm_year+1900;
 
 //in verbindung.txt schreiben datum,uhrzeit,progname und pfad
 fprintf(safefile,"%02d.%02d.%02d %02d:%02d:%02d\t%s\t%s\n",tag,monat,jahr,stunden,
@@ -172,14 +172,14 @@ return EXIT_SUCCESS;
 
 //filter für holen(nur zahlen)
 int ho_filter(const struct dirent *dir){
-    	if(isdigit(*dir->d_name)==0)          
+    	if(isdigit(*dir->d_name)==0)
     	return EXIT_SUCCESS;
     	return EXIT_FAILURE;
 }
 
 //pid verzeichniss holen() aus /proc/?
 //fd verzeichnisse holen() aus /proc/1234/fd/?
-int holen(char *verz){   	
+int holen(char *verz){ 
     
 struct dirent **liste;	
 int zae=0,len=0;
@@ -189,7 +189,7 @@ int zae=0,len=0;
      	return EXIT_FAILURE;
         }
         else if(zae!=0){
-	//dynamisch Speicher bereitstellen für ch	
+	//dynamisch Speicher bereitstellen für ch
         ch = (char**) malloc (sizeof(int*)*zae);  
 	if(ch == NULL)
      	return EXIT_FAILURE;
@@ -203,7 +203,7 @@ int zae=0,len=0;
        
         	//ch füllen mit den gesuchten Verzeichnissen
     		strncpy(ch[iHO],liste[iHO]->d_name,len-1);
-        	ch[iHO][sizeof(len-1]='\0';
+        	ch[iHO][len-1]='\0';
 		free(liste[iHO]);  
         	} //for(iHO=0
         	        
@@ -237,8 +237,8 @@ iHO=0;
 
 char pfad[end][16];     //pid  /proc/123.../fd
 char pfadEXE[end][17]; //alle /proc/123.../exe
-//auf basis von pfad den letzten pfadK weiter bauen um die sockets zu holen    
-char pfadK[PFADK_MENGE][23]; //alle /proc/123.../fd/8...    
+//auf basis von pfad den letzten pfadK weiter bauen um die sockets zu holen
+char pfadK[PFADK_MENGE][23]; //alle /proc/123.../fd/8...
 
 	//pfade bauen
 	for(int c=0;c<end;c++){
@@ -246,7 +246,7 @@ char pfadK[PFADK_MENGE][23]; //alle /proc/123.../fd/8...
 	snprintf(pfad[c],15,"%s/%s/%s", PFAD_PROC,ch[c],PFAD_FD_END);
 	snprintf(pfadEXE[c],16,"%s/%s/%s", PFAD_PROC,ch[c],PFAD_EXE_END);
 	free(ch[c]);
-	}			
+	}
 	}
 //leeren für das nächste holen()
 free(ch);
@@ -257,21 +257,21 @@ memset(&ch,0,sizeof(ch));
 	holen(pfad[c]);
 	
 		for(int b=0;b<iHO;b++){
-		if(ch!=NULL && d<PFADK_MENGE){  	
+		if(ch!=NULL && d<PFADK_MENGE){
 		snprintf(pfadK[d],22,"%s/%s", pfad[c],ch[b]);
 		//printw("%d.%s\t", d,pfadK[d]);
 		d++;  
-		free(ch[b]);		
+		free(ch[b]);
 		} 
 		} 	
 	//alles leeren für das nächste holen(pfad[k])
 	iHO=0;          
 	free(ch);
-	memset(&ch,0,sizeof(ch));  		
+	memset(&ch,0,sizeof(ch)); 
 	} //for int c=0
 	
 
-//----------------------- verzeichnisse holen ------------------------------------------------------------	
+//----------------------- verzeichnisse holen ------------------------------------------------------------
 	
 //----------------------- pid,socket,prg name in struct.alle ---------------------------------------------
 
@@ -281,7 +281,7 @@ memset(&ch,0,sizeof(ch));
 int aE=0,bE=0;
 //für exe namen    
 char buffi1[100]={""}; 	
-//für socket nummer 	
+//für socket nummer
 char buffi2[15]={""};
 //zum entfernen   
 char nadel[]="socket:[";
@@ -291,7 +291,7 @@ char trenner[] = "/";
 char suchset[]="1234567890";
 
 //l um pid in int umzuwandeln, l1 socket in int umzuwandeln
-char *l, *l1;		   
+char *l, *l1;
 //socket nummer
 char *ptrK=buffi2;
 char *ptrKT;
@@ -306,7 +306,7 @@ struct pidSocketEXE{
     	int pidE;
     	char exE[20];
     	char exEL[100];  
-}alleEXE[end]; 	      
+}alleEXE[end];
 
                 
 //programm name in eine struct.alleEXE liste eintragen
@@ -317,8 +317,8 @@ for(int c=0;c<end;c++){
      	buffi1[sizeof(buffi1)-1]='\0';
      	if(len!=-1){
 	        	    
-	//pid rausziehen aus pfadEXE[c] für struct alleEXE	        
-	ptrE=strpbrk(pfadEXE[c],suchset); 	        
+	//pid rausziehen aus pfadEXE[c] für struct alleEXE
+	ptrE=strpbrk(pfadEXE[c],suchset);
 	//erhalten 1234/fd/8 dann teile nach /
 	lE=strtok(ptrE,trenner);
 	//erhalten 1234 dann wandle in int um
@@ -328,25 +328,26 @@ for(int c=0;c<end;c++){
 	 //pid in die struct.alleEXE schreiben
 	 alleEXE[bE].pidE=aE;
 
+	 //langer exe name /snap/progname/1234/usw/progname in die struct.alleEXE schreiben
+	 strncpy(alleEXE[bE].exEL,buffi1,sizeof(alleEXE[bE].exEL)-1); 
+	 alleEXE[bE].exEL[sizeof(alleEXE[bE].exEL)-1]='\0';
+	 	 
 	 //strrchr das letzte auftreten von / finden und das was danach kommt
 	 //ascii zahl 47 für / geht besser für strrchr() 
 	 ptrPrgN=strrchr(buffi1,47);
+		 
 	 //ergebnis: ptrPrgN=/progname
-	 //deswegen / entfernen mit strtok
-	 ptrPrgN=strtok(ptrPrgN,trenner);
-                
-	 //langer exe name /snap/progname/1234/usw/progname
-	 strncpy(alleEXE[bE].exEL,buffi1,sizeof(alleEXE[bE].exEL)-1); 
-	 alleEXE[bE].exEL[sizeof(alleEXE[bE].exEL)-1]='\0';
-	        
-	 //kurzer exe progname
-	 strncpy(alleEXE[bE].exE,ptrPrgN,sizeof(alleEXE[bE].exE)-1); 
-	 alleEXE[bE].exE[sizeof(alleEXE[bE].exE)-1]='\0';	        
+	 //deswegen / entfernen mit ptrPrgN+1       
+	 //kurzer exe progname in die struct.alleEXE schreiben
+	 if(ptrPrgN){	 
+	 strncpy(alleEXE[bE].exE,ptrPrgN+1,sizeof(alleEXE[bE].exE)-1); 
+	 alleEXE[bE].exE[sizeof(alleEXE[bE].exE)-1]='\0';
+	 }else{printw("Programmname nicht auslesbar: %s\n",ptrPrgN);}
 
-	 //jedem durchlauf geleert 
+	 //nach jedem durchlauf geleert 
 	 memset(&buffi1,0,sizeof(buffi1));
 	 memset(&ptrPrgN,0,sizeof(ptrPrgN));
-	 //zähler um eins erhöhen	        
+	 //zähler um eins erhöhen
 	 bE++;
 	 }else{
 	 printw("Zuviele Programmnamen gleichzeitig geöffnet!\n");
@@ -358,7 +359,7 @@ for(int c=0;c<end;c++){
 //pfadK durchgehen und mit readlink den symbolischen link auslesen für die sockets 
 ///proc/1234/fd/8 --> 'socket:[30999]'
 //dann endergebnis struct.alle bauen
-for(int c=0;c<=d-1;c++){		
+for(int c=0;c<=d-1;c++){
        
         ssize_t len1=readlink(pfadK[c],buffi2,sizeof(buffi2)-1);
         buffi2[sizeof(buffi2)-1]='\0';
@@ -372,7 +373,7 @@ for(int c=0;c<=d-1;c++){
          l=strtok(ptrKT,trenner); 
          f=strtol(l,&l,10);  //ergebnis: 1487
                 
-         //jetzt socket:[ entfernen          
+         //jetzt socket:[ entfernen
 	 //wir suchen alle zahlen in socket:[12345
 	 ptrK=strpbrk(ptrK,suchset);
          //wir brauchen es als int also umwandeln
@@ -382,7 +383,7 @@ for(int c=0;c<=d-1;c++){
         
         	//programm namen holen anhand der pid(f) in alleEXE[c].pidE
         	//alles zusammen fügen und struct.alle bauen
-        	for(int c2=0;c2<=bE-1;c2++){		
+        	for(int c2=0;c2<=bE-1;c2++){
         
         	 if(f==alleEXE[c2].pidE){
         
@@ -407,8 +408,8 @@ for(int c=0;c<=d-1;c++){
 		  } //if(zALLE      
 		 } //if(f==
         	} //for(int c2
-    	} //if(strstr  
-    	} //if(len1 	
+    	} //if(strstr
+    	} //if(len1
 } //for(int c
 
 	zALLE=0;
@@ -417,8 +418,8 @@ for(int c=0;c<=d-1;c++){
 	memset(&pfad,0,sizeof(pfad));
 	memset(&pfadK,0,sizeof(pfadK));
 	memset(&pfadEXE,0,sizeof(pfadEXE));  
-	return EXIT_SUCCESS;				
-} //inode()	
+	return EXIT_SUCCESS;
+} //inode()
 
 //----------------------- pid,socket,prg name in struct.alle ---------------------------------------------
 
@@ -572,7 +573,7 @@ int zeileLoe=0;
     while(fgets(bufferLi, 19, ListeP) != NULL){
       	strncpy(filterPRG[Li], bufferLi, sizeof(filterPRG[Li])-1);
       	filterPRG[Li][sizeof(filterPRG[Li])-1]='\0';
-      	//printw("%s\n",filterPRG[Li]);	
+      	//printw("%s\n",filterPRG[Li]);
 	Li++;
     } 
     fclose(ListeP);
@@ -584,7 +585,7 @@ int zeileLoe=0;
     mvprintw(3,0,"Erlaubte Programme:\n");
       for(int c=0;c<zeilen;c++){
       printw("%d.%s",c,filterPRG[c]);
-      napms(200);            
+      napms(200);
       }
     }
     
@@ -592,7 +593,7 @@ int zeileLoe=0;
     if(key==114){
     clear();
     	    printw("\n\nBitte die Nummer eingeben:\n");
-    	    printw("Die neue Liste:\n");                 
+    	    printw("Die neue Liste:\n");
             fgets(buf3, 3, stdin);
             sscanf(buf3, "%d", &zeileLoe);  
         
@@ -606,9 +607,9 @@ int zeileLoe=0;
 		strncpy(filterPRG[c],"",sizeof(filterPRG[c])-1);
                 filterPRG[c][sizeof(filterPRG[c])-1]='\0';
 		}		
-		fputs(filterPRG[c],ListeP);				
+		fputs(filterPRG[c],ListeP);
 		printw("%s",filterPRG[c]);
-		}				
+		}
     fclose(ListeP);	
     }
 
@@ -618,7 +619,7 @@ int zeileLoe=0;
     while(1){
       
         //empfange
-        numbytes=recv(sock, recv_buf, sizeof(recv_buf), 0);        
+        numbytes=recv(sock, recv_buf, sizeof(recv_buf), 0);
         //prüfe ob etwas empfangen wurde       
         if(numbytes<0)
         fprintf(stdout, "RECV ERROR\n");
@@ -638,7 +639,7 @@ int zeileLoe=0;
            } 
            
            //packe die daten in diag_msg
-           diag_msg=(struct inet_diag_msg*) NLMSG_DATA(nlh);               
+           diag_msg=(struct inet_diag_msg*) NLMSG_DATA(nlh);
            //attribute dazu braucht man die länge
            rtalen=nlh->nlmsg_len-NLMSG_LENGTH(sizeof(*diag_msg));
            //user
@@ -660,7 +661,7 @@ int zeileLoe=0;
 	     return EXIT_SUCCESS;
     	     }
     	     
-    	     //prüfen ob was drin ist		
+    	     //Prüfen ob was drin ist
              if(local_addr_buf[0]==0 || remote_addr_buf[0]==0){
              fprintf(stderr, "Bekomme keine der benötigten Verbindungsinformationen\n");
     	     }else{
@@ -669,12 +670,13 @@ int zeileLoe=0;
                 //Filter 0.0.0.0
                 if(strcmp(filterIP,remote_addr_buf)!=0){
                 
-		for(size_t c=0;c<PIDMenge;c++){
+		//Vergleiche nun den gefunden Socket mit dem gespeicherten Socket
+		for(int c=0;c<PIDMenge;c++){
 		if(alle[c].socket==diag_msg->idiag_inode)
 		jop=c; 
 		} 
-					
-		//wenn das überwachte programm geschlossen wird  
+		
+		//Wenn das überwachte Programm geschlossen wird  
 		if(diag_msg->idiag_inode==0){
                 strncpy(alle[jop].exEP,"geschlossen",sizeof(alle[jop].exEP)-1);
                 alle[jop].exEP[sizeof(alle[jop].exEP)-1]='\0';
@@ -684,23 +686,23 @@ int zeileLoe=0;
 		//filter für erlaubte prognamen
 		for(int c=0;c<zeilen;c++){
 		if(strstr(filterPRG[c],alle[jop].exEP)!=0)
-		findestr=0;              
+		findestr=0;
 		} 
                 
 		if(findestr==1 && key!=108){    
                 
-                //für das vorzeichen
+                //für das Vorzeichen
                 vorz=62; //ASCII für >
 		
                 if(diag_msg->idiag_inode==0)
                 vorz=60; //ASCII für <
-                                                      
-                r++;                
+    
+                r++;
                 attrset(COLOR_PAIR(1));
 
 		//Fensterhöhe prüfen
 		if(r<hoehe){
-		//Fensterbreite unter 90 dann lasse die src IP weg                
+		//Fensterbreite unter 90 dann lasse die src IP weg
 		if(breit>90){
                 mvprintw(zeiR,0,"%c%d user:%s(uid:%u) src:%s:%d ", 
                 vorz,
@@ -728,7 +730,7 @@ int zeileLoe=0;
 			gethostbyaddr_r((const void *)&ip,sizeof(ip),AF_INET,&result,buff,
 		                 	sizeof(buff),&gethost,&h_error); 
 		
-			if(h_error==0){    		
+			if(h_error==0){
        			printw("dst:%s:%d prg:%s\n",
                 	gethost->h_name,
                 	ntohs(diag_msg->id.idiag_dport),
@@ -736,7 +738,7 @@ int zeileLoe=0;
                 	}else{
                 	//z.B. bei nxdomain steht für non-existent Domain
                 	printw("DNS Fehler:%d\n",h_error);
-                	}	              
+			}
                         
                 //IP anzeigen
 		}else{   
@@ -775,12 +777,12 @@ int zeileLoe=0;
                 strncpy(davor,"iptables -A OUTPUT -p tcp -d ",30-1);
                 davor[30-1]='\0';
                 strncpy(danach," -j DROP",9-1);
-                danach[9-1]='\0';                
+                danach[9-1]='\0';
                 strncat(davor,zwi[zu],strlen(zwi[zu]));
                 strncat(davor,danach,strlen(danach));
                 printw("%s\n",davor);
                 system(davor);
-                printw("Die Verbindungnr.%d wurde geschlossen\n",zu);              
+                printw("Die Verbindungnr.%d wurde geschlossen\n",zu);
                 } //if(zu
 		} //if(r
 			
@@ -791,7 +793,7 @@ int zeileLoe=0;
                 						 erlaub,alle[jop].exEP);
                 }                    
 		} //if(findestr 
-		findestr=1;                       
+		findestr=1;
               } //if(strcmp(filterIP
               } //else if(local_addr
 
@@ -801,7 +803,7 @@ int zeileLoe=0;
               attr=(struct rtattr*) (diag_msg+1);
 
               while(RTA_OK(attr,rtalen)){
-              if(attr->rta_type==INET_DIAG_INFO){                
+              if(attr->rta_type==INET_DIAG_INFO){
               tcpi=(struct tcp_info*) RTA_DATA(attr);
 
 	      //filterliste der erlaubten programmnamen
@@ -810,8 +812,8 @@ int zeileLoe=0;
 	      findestr=0;
 	      }
 		
-	        //Attriubute anzeigen	
-		if(findestr==1 && strcmp(filterIP,remote_addr_buf)!=0 && key!=108 && nhoch==1){		
+	        //Attriubute anzeigen
+		if(findestr==1 && strcmp(filterIP,remote_addr_buf)!=0 && key!=108 && nhoch==1){
                 printw("   State:%s Recv:%ldkB Send:%ldkB RTT:%gms "
                 "Recv.RTT:%gms Snd_cwnd:%u/%u\n",
                 tcp_states_map[tcpi->tcpi_state],
@@ -820,9 +822,9 @@ int zeileLoe=0;
                 (double) tcpi->tcpi_rtt/1000, 
                 (double) tcpi->tcpi_rcv_rtt/1000, 
                 tcpi->tcpi_unacked,
-                tcpi->tcpi_snd_cwnd);                    
+                tcpi->tcpi_snd_cwnd);
                 } //if(findestr
-		findestr=1;         
+		findestr=1;
               } //if(attr->rta_type
               attr=RTA_NEXT(attr,rtalen); 
               } //while(RTA_OK
@@ -834,12 +836,12 @@ int zeileLoe=0;
 		else
 		iRE=0;
               	             	
-           nlh=NLMSG_NEXT(nlh,numbytes);       	      
+           nlh=NLMSG_NEXT(nlh,numbytes);
 	   } //while(NLMSG_OK
     } //while endlos
 
 //filterPRG leeren
-free(filterPRG);		
+free(filterPRG);
 //----------------------- recive socket mit struct.alle vergleichen und anzeigen -------------------------
 
 } //loop()
@@ -881,7 +883,7 @@ int maxrow, maxcol;
 char soundp[33];	
 
     //prüfen ob programm mit root rechten ausgeführt 
-    if(geteuid()!=0){			
+    if(geteuid()!=0){
     printf("\n\x1b[32mDie Anwendung mit sudo starten damit man auf alle Programme zugreifen "
            "kann!\x1b[0m\n\n");
     sleep(10);
@@ -897,7 +899,7 @@ initscr();  //start curses mode
 cbreak();   //line buffering aus
 noecho();   //echo aus
 scrollok(stdscr, TRUE); //Damit am Ende der letzten Zeile beim Einfügen einer neuen Zeile weiter 
-			//nach unten gescrollt wird                             
+			//nach unten gescrollt wird
 //sternchen
 scroll(stdscr); //scrolling
 //sternchen
@@ -909,11 +911,11 @@ nodelay(stdscr, TRUE); //verhindern bei der Verwendung der Funktion getch() anh�
     else start_color(); 			//farbe starten
     init_pair(1, COLOR_GREEN, COLOR_BLACK);     //farbe auswählen
 //ncurses
-        
+
 
     //tasten eingabe des benutzer abfangen während das programm läuft zur steuerung
     //113 ist q für quit bzw. beenden
-    while(key != 113){          
+    while(key != 113){
           
           //INET_DIAG abfrage anlegen und einstellen
           send_diag_msg(sock);
@@ -928,13 +930,13 @@ nodelay(stdscr, TRUE); //verhindern bei der Verwendung der Funktion getch() anh�
 	  	           
           //unerwünschte verbindung schliessen
           zu=0;
-          //erlauben von programmen               
+          //erlauben von programmen
           erlaub=0;
 
 	 //sound abspielen
 	 //durch und iRE damit nur einmal der sound kommt wenn eine neue verbindung aufgeht
 	 if(iRE==1 && durch==0){
-	 strncpy(soundp,"aplay -q labor/sounds/space3.wav",33-1);
+	 strncpy(soundp,"aplay -q pferd.wav",33-1);
 	 soundp[33-1]='\0';
 	 system(soundp);
 	 durch++;
@@ -950,44 +952,44 @@ nodelay(stdscr, TRUE); //verhindern bei der Verwendung der Funktion getch() anh�
           if(key == ERR) 
           napms(10);
                 
-          //verbindung verbieten    	      
+          //verbindung verbieten
           if(key == 's'){
           printw("Bitte die Nummer eingeben:\n");
           fgets(buf, 3, stdin);
           sscanf(buf, "%d", &v);  
-            if(geteuid()==0){			          
+            if(geteuid()==0){
             zu=v;
-            printw("Die Verbindung %d wird verboten...\n",v);            
+            printw("Die Verbindung %d wird verboten...\n",v);
             }else{ 
-            printw("Die Anwendung mit sudo starten um Verbindungen verbieten zu können!\n");          
+            printw("Die Anwendung mit sudo starten um Verbindungen verbieten zu können!\n");
             }  
           }
 	  
-	  //erlauben von programmen                     	  
+	  //erlauben von programmen
     	  if(key == 'e'){
         printw("Bitte die Nummer eingeben:\n");
         fgets(buf2, 3, stdin);
         sscanf(buf2, "%d", &v2);  
         erlaub=v2; 
-        //printw("Die Verbindung %d wurde dauerhaft erlaubt...\n",v2);            
+        //printw("Die Verbindung %d wurde dauerhaft erlaubt...\n",v2);
         }
-             	  
+
     
     	   //sternchen anzeigen
     	   if(snoop==0){
-    	   scrl(1);			
-    		  for(int i=0;i<5;i++){    
+    	   scrl(1);
+    		  for(int i=0;i<5;i++){
      		  zufall=rand () % maxcol; 
      		  mvaddch(maxrow-1, zufall, '0'); 
      		  zufall2=rand () % maxcol;      
-     		  mvaddch(maxrow-2, zufall2, '1');      
+     		  mvaddch(maxrow-2, zufall2, '1');
     		  }
     	   } 
     } //while(key
 
 endwin();
 close(sock);
-return EXIT_SUCCESS;				
+return EXIT_SUCCESS;
 } //main
 
 
