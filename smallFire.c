@@ -936,8 +936,8 @@ nodelay(stdscr, TRUE); //verhindern bei der Verwendung der Funktion getch() anh√
 	 //sound abspielen
 	 //durch und iRE damit nur einmal der sound kommt wenn eine neue verbindung aufgeht
 	 if(iRE==1 && durch==0){
-	 strncpy(soundp,"aplay -q pferd.wav",33-1);
-	 soundp[33-1]='\0';
+	 strncpy(soundp,"aplay -q pferd.wav",19-1);
+	 soundp[19-1]='\0';
 	 system(soundp);
 	 durch++;
 	 }
