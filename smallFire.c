@@ -942,46 +942,46 @@ nodelay(stdscr, TRUE); //verhindern bei der Verwendung der Funktion getch() anh�
 	 if(iRE==0)
 	 durch=0;
 
-          //ncurses
-          key=getch();
+         //ncurses
+         key=getch();
           
-          //erhöht die geschwindigkeit - getch wird für 10 milisekunden immer wieder ausgesetzt 
-          if(key == ERR) 
-          napms(10);
+         //erhöht die geschwindigkeit - getch wird für 10 milisekunden immer wieder ausgesetzt 
+         if(key == ERR) 
+         napms(10);
                 
-          //verbindung verbieten
-          if(key == 's'){
-          printw("Bitte die Nummer eingeben:\n");
-          fgets(buf, 3, stdin);
-          sscanf(buf, "%d", &v);  
-            if(geteuid()==0){
-            zu=v;
-            printw("Die Verbindung %d wird verboten...\n",v);
-            }else{ 
-            printw("Die Anwendung mit sudo starten um Verbindungen verbieten zu können!\n");
-            }  
-          }
+         //verbindung verbieten
+         if(key == 's'){
+         printw("Bitte die Nummer eingeben:\n");
+         fgets(buf, 3, stdin);
+         sscanf(buf, "%d", &v);  
+           if(geteuid()==0){
+           zu=v;
+           printw("Die Verbindung %d wird verboten...\n",v);
+           }else{ 
+           printw("Die Anwendung mit sudo starten um Verbindungen verbieten zu können!\n");
+           }  
+         }
 	  
-	  //erlauben von programmen
-    	  if(key == 'e'){
-        printw("Bitte die Nummer eingeben:\n");
-        fgets(buf2, 3, stdin);
-        sscanf(buf2, "%d", &v2);  
-        erlaub=v2; 
-        //printw("Die Verbindung %d wurde dauerhaft erlaubt...\n",v2);
-        }
-
-    
-    	   //sternchen anzeigen
-    	   if(snoop==0){
-    	   scrl(1);
-    		  for(int i=0;i<5;i++){
-     		  zufall=rand () % maxcol; 
-     		  mvaddch(maxrow-1, zufall, '0'); 
-     		  zufall2=rand () % maxcol;      
-     		  mvaddch(maxrow-2, zufall2, '1');
-    		  }
-    	   } 
+	 //erlauben von programmen
+    	 if(key == 'e'){
+         printw("Bitte die Nummer eingeben:\n");
+         fgets(buf2, 3, stdin);
+         sscanf(buf2, "%d", &v2);  
+         erlaub=v2; 
+         //printw("Die Verbindung %d wurde dauerhaft erlaubt...\n",v2);
+         }
+	    
+	    
+    	 //sternchen anzeigen
+    	 if(snoop==0){
+    	 scrl(1);
+    	   for(int i=0;i<5;i++){
+     	   zufall=rand () % maxcol; 
+           mvaddch(maxrow-1, zufall, '0'); 
+           zufall2=rand () % maxcol;      
+     	   mvaddch(maxrow-2, zufall2, '1');
+    	   }
+    	 } 
     } //while(key
 
 endwin();
