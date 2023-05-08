@@ -153,6 +153,7 @@ fclose(safefile);
 	printw("Konnte Datei \"liste.txt\" nicht öffnen!\n");
 	return EXIT_FAILURE;
 	}
+		//in liste.txt schreiben Programmname
 		if(strlen(exEPF)<19){
 		fprintf(safefileL,"%s\n",exEPF);
 		}else{
@@ -186,11 +187,12 @@ int zae=0,len=0;
      	return EXIT_FAILURE;
         }
         else if(zae!=0){
-	//dynamisch Speicher bereitstellen für ch
+	//dynamisch Speicher bereitstellen für erste Dimension in ch
         ch = (char**) malloc (sizeof(int*)*zae);  
 	if(ch == NULL)
      	return EXIT_FAILURE;
         
+		//Die genaue Länge ermitteln und dynamisch Speicher bereitstellen für zweite Dimension in ch
 		for(iHO=0;iHO<zae;iHO++){
         	len=strlen(liste[iHO]->d_name);
         	len+=1;
