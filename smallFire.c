@@ -944,7 +944,9 @@ nodelay(stdscr, TRUE); //verhindern bei der Verwendung der Funktion getch() anh�
 	 //Zeile 939 und 940 kommentieren mit //
          //strncpy(soundp,"aplay -q pferd.wav",19-1);	 
 	 //soundp[19-1]='\0';
-	 //Zeile 948 und 949 auskommentieren ohne //	 
+	 //Zeile 948 und 949 auskommentieren ohne //
+	 //Achtung id hier 1000 bei anderer id zweimal ändern in z.b. 701 bitte dann auch die soundp[] 
+         //länge ändern zweimal von 66-1 auf 64-1 umstellen und oben char soundp[64];	 
 	 //strncpy(soundp,"sudo -u '#1000' XDG_RUNTIME_DIR=/run/user/1000 aplay -q pferd.wav",66-1);	 
 	 //soundp[66-1]='\0';
 	 system(soundp);
