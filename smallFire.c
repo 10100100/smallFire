@@ -940,7 +940,7 @@ nodelay(stdscr, TRUE); //verhindern bei der Verwendung der Funktion getch() anh√
 	 soundp[19-1]='\0';
 	 //falls es probleme mit alsa oder aplay gibt kann man es damit umgehen
 	 //Zeile 882 //char soundp[33]; kommentieren mit //
-         //Zeile 883 char soundp[67]; auskommentieren ohne //   
+         //Zeile 883 char soundp[66]; auskommentieren ohne //   
 	 //Zeile 939 und 940 kommentieren mit //
          //strncpy(soundp,"aplay -q pferd.wav",19-1);	 
 	 //soundp[19-1]='\0';
