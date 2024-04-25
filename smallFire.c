@@ -879,8 +879,9 @@ int snoop=0;
 int maxrow, maxcol;
 //sternchen
 //sound
-char soundp[33];	
-
+char soundp[19];	
+//char soundp[66];
+	
     //prüfen ob programm mit root rechten ausgeführt 
     if(geteuid()!=0){
     printf("\n\x1b[32mDie Anwendung mit sudo starten damit man auf alle Programme zugreifen "
@@ -935,8 +936,17 @@ nodelay(stdscr, TRUE); //verhindern bei der Verwendung der Funktion getch() anh�
 	 //sound abspielen
 	 //durch und iRE damit nur einmal der sound kommt wenn eine neue verbindung aufgeht
 	 if(iRE==1 && durch==0){
-	 strncpy(soundp,"aplay -q pferd.wav",19-1);
+	 strncpy(soundp,"aplay -q pferd.wav",19-1);	 
 	 soundp[19-1]='\0';
+	 //falls es probleme mit alsa oder aplay gibt kann man es damit umgehen
+	 //Zeile 882 //char soundp[33]; kommentieren mit //
+         //Zeile 883 char soundp[67]; auskommentieren ohne //   
+	 //Zeile 939 und 940 kommentieren mit //
+         //strncpy(soundp,"aplay -q pferd.wav",19-1);	 
+	 //soundp[19-1]='\0';
+	 //Zeile 948 und 949 auskommentieren ohne //	 
+	 //strncpy(soundp,"sudo -u '#1000' XDG_RUNTIME_DIR=/run/user/1000 aplay -q pferd.wav",66-1);	 
+	 //soundp[66-1]='\0';
 	 system(soundp);
 	 durch++;
 	 }
