@@ -58,6 +58,7 @@ installiert sein.<br><br>
 
 
 Compilieren:<br>
+sudo apt install build-essential<br>
 sudo apt install libncurses5-dev libncursesw5-dev<br>
 gcc -o smallFire smallFire.c -lncurses -Wall<br><br>
 
